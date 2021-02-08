@@ -4,3 +4,4 @@ confidential_results/results.csv
 results.csv
 send_entry_number.py
 .idea
+public_results/results_public.csv
