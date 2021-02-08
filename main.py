@@ -17,7 +17,6 @@ while len(allEntries) > 0:
 	allEntries.remove(thisResult)
 
 
-
 group_count = 0 # Dont change this
 with open('confidential_results/results.csv', 'w+', newline='') as csvfile:
 	fieldnames = ["Entry","Email Address","Name:","Slot","Group"]
@@ -26,7 +25,7 @@ with open('confidential_results/results.csv', 'w+', newline='') as csvfile:
 
 	for eachResult in results:
 		index = results.index(eachResult)
-		eachResult["Slot"] = index
+		eachResult["Slot"] = index +1
 
 		if index % group_size == 0:
 			group_count += 1
