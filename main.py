@@ -1,6 +1,7 @@
 import csv
 from random import randint
 
+group_size = 5  # Change this to match your group size
 allEntries = []
 
 with open('confidential_entries/entries.csv', 'r') as csvfile:
@@ -16,7 +17,7 @@ while len(allEntries) > 0:
 	allEntries.remove(thisResult)
 
 
-group_size = 4  # Change this to match your group size
+
 group_count = 0 # Dont change this
 with open('confidential_results/results.csv', 'w+', newline='') as csvfile:
 	fieldnames = ["Entry","Email Address","Name:","Slot","Group"]
@@ -27,7 +28,7 @@ with open('confidential_results/results.csv', 'w+', newline='') as csvfile:
 		index = results.index(eachResult)
 		eachResult["Slot"] = index
 
-		if index % 4 == 0:
+		if index % group_size == 0:
 			group_count += 1
 			eachResult["Group"] = group_count
 

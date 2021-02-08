@@ -16,6 +16,7 @@
   - Field 2 is name
   - Field 3 is email (for sending group and slot number)
   - Populate this file with your data!
+- Set your Group Size at by changing the "group_size" variable on line 4
   
 - Once data is loaded run the "main.py" script
     - Results files will be put into respective directories referenced above
