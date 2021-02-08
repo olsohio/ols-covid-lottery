@@ -1,6 +1,6 @@
-entries.csv
+confidential_entries/entries.csv
+confidential_entries/test_entries.csv
+confidential_results/results.csv
 results.csv
 send_entry_number.py
 .idea
-results_public.csv
-*.csv

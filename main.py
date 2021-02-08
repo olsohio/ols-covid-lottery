@@ -1,33 +1,45 @@
-import csv, json
+import csv
 from random import randint
 
 allEntries = []
 
-with open('entries.csv', 'r') as csvfile:
+with open('confidential_entries/entries.csv', 'r') as csvfile:
 	reader = csv.DictReader(csvfile)
 	for row in reader:
 		allEntries.append(row)
-
 
 results = []
 while len(allEntries) > 0:
 	randomEntry = randint(0, len(allEntries) - 1)
 	thisResult = allEntries[randomEntry]
-	print(allEntries[randomEntry]["Entry"])
 	results.append(thisResult)
 	allEntries.remove(thisResult)
 
-with open('results.csv', 'w+', newline='') as csvfile:
-	fieldnames = ["Timestamp","Entry","Email Address","Name:"]
+
+group_size = 4  # Change this to match your group size
+group_count = 0 # Dont change this
+with open('confidential_results/results.csv', 'w+', newline='') as csvfile:
+	fieldnames = ["Entry","Email Address","Name:","Slot","Group"]
 	writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 	writer.writeheader()
+
 	for eachResult in results:
+		index = results.index(eachResult)
+		eachResult["Slot"] = index
+
+		if index % 4 == 0:
+			group_count += 1
+			eachResult["Group"] = group_count
+
+		else:
+			eachResult["Group"] = group_count
+
 		writer.writerow(dict(eachResult))
 
-with open('results_public.csv', 'w+', newline='') as outfile:
-	writer = csv.writer(outfile,delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-	print("******")
+with open('public_results/results_public.csv', 'w+', newline='') as outfile:
+	writer = csv.writer(outfile,delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 	for eachResult in results:
 		eachResult = dict(eachResult)
-		print(eachResult['Entry'])
-		writer.writerow([eachResult['Entry']])
+		print(f"Reference Number: {eachResult['Entry']} assigned to Slot {eachResult['Slot']} Group {eachResult['Group']} ")
+		slot = f"Slot {index}"
+		writer.writerow([f"Reference Number {eachResult['Entry']}", f"Slot {eachResult['Slot']}" , f"Group {eachResult['Group']}"])
